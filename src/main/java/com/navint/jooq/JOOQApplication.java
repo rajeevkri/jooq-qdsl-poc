@@ -19,6 +19,7 @@ import static com.navint.jooq.model.pms.Tables.*;
  * 
  * Test code run query from jooq
  * 
+ * @author Rajeev Krishna Singh
  *
  */
 public class JOOQApplication {
