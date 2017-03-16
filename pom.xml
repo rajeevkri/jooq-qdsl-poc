@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.navint</groupId>
+	<artifactId>hello-jooq-qdsl</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>jOOQ and query dsl POC</name>
+	<description>jOOQ and query dsl POC for generating schema from db and write query</description>
+
+	<properties>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq</artifactId>
+			<version>3.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq-meta</artifactId>
+			<version>3.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq-codegen</artifactId>
+			<version>3.8.3</version>
+		</dependency>
+
+		<!-- dependencies for querydsl -->
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-sql</artifactId>
+			<version>${querydsl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-sql-codegen</artifactId>
+			<version>${querydsl.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-core</artifactId>
+			<version>${querydsl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+
+			<!-- querydsl plugin to generate code from db -->
+			<plugin>
+				<groupId>com.querydsl</groupId>
+				<artifactId>querydsl-maven-plugin</artifactId>
+				<version>4.0.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-export</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jdbcDriver>${jdbc.driver}</jdbcDriver>
+					<jdbcUrl>${jdbc.url}</jdbcUrl>
+					<jdbcUser>${jdbc.user}</jdbcUser>
+					<jdbcPassword>${jdbc.password}</jdbcPassword>
+					<schemaPattern>test%</schemaPattern>
+					<tableNamePattern>%custom%</tableNamePattern>
+					<exportBeans>true</exportBeans>
+					<packageName>com.navint.dsl</packageName>
+					<targetFolder>${project.basedir}/target/generated-sources/qdsl</targetFolder>
+					<sourceFolder>${project.basedir}/target/generated-sources/qdsl</sourceFolder>
+					<exportForeignKeys>false</exportForeignKeys>
+					<exportDirectForeignKeys>false</exportDirectForeignKeys>
+					<exportInverseForeignKeys>false</exportInverseForeignKeys>
+					<schemaToPackage>true</schemaToPackage>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>6.0.3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- JOOQ plugin to generate code -->
+			<plugin>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen-maven</artifactId>
+				<version>3.8.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies />
+				<configuration>
+					<jdbc>
+						<driver>${jdbc.driver}</driver>
+						<url>${jdbc.url}</url>
+						<user>${jdbc.user}</user>
+						<password>${jdbc.password}</password>
+					</jdbc>
+					<generator>
+						<database>
+							<name>org.jooq.util.mysql.MySQLDatabase</name>
+							<includes>[bs].*</includes>
+							<excludes></excludes>
+							<schemata>
+								<schema>
+									<inputSchema>library</inputSchema>
+								</schema>
+								<schema>
+									<inputSchema>test</inputSchema>
+								</schema>
+							</schemata>
+						</database>
+						<target>
+							<packageName>com.navint.jooq.model</packageName>
+							<directory>target/generated-sources/jooq</directory>
+						</target>
+					</generator>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<systemProperties>
+						<systemProperty>
+							<key>jdbc.driver</key>
+							<value>${jdbc.driver}</value>
+						</systemProperty>
+						<systemProperty>
+							<key>jdbc.user</key>
+							<value>${jdbc.user}</value>
+						</systemProperty>
+						<systemProperty>
+							<key>jdbc.password</key>
+							<value>${jdbc.password}</value>
+						</systemProperty>
+						<systemProperty>
+							<key>jdbc.url</key>
+							<value>${jdbc.url}</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<jdbc.user>root</jdbc.user>
+				<jdbc.password>root</jdbc.password>
+				<jdbc.url>jdbc:mysql://localhost:3306/test?nullNamePatternMatchesAll=true</jdbc.url>
+				<jdbc.driver>com.mysql.cj.jdbc.Driver</jdbc.driver>
+				<querydsl.version>4.0.3</querydsl.version>
+			</properties>
+		</profile>
+	</profiles>
+
+
+</project>

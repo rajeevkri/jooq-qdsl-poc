@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="target/generated-sources/qdsl" output="target/test-classes" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="src" path="target/generated-sources/jooq" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/6.0.3/mysql-connector-java-6.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jooq/jooq/3.8.3/jooq-3.8.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jooq/jooq-meta/3.8.3/jooq-meta-3.8.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jooq/jooq-codegen/3.8.3/jooq-codegen-3.8.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/querydsl/querydsl-sql/4.0.3/querydsl-sql-4.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/querydsl/querydsl-core/4.0.3/querydsl-core-4.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/18.0/guava-18.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mysema/commons/mysema-commons-lang/0.2.4/mysema-commons-lang-0.2.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/infradna/tool/bridge-method-annotation/1.13/bridge-method-annotation-1.13.jar"/>
+  <classpathentry kind="var" path="M2_REPO/joda-time/joda-time/1.6/joda-time-1.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/servicemix/bundles/org.apache.servicemix.bundles.javax-inject/1_2/org.apache.servicemix.bundles.javax-inject-1_2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/querydsl/querydsl-sql-codegen/4.0.3/querydsl-sql-codegen-4.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/querydsl/querydsl-codegen/4.0.3/querydsl-codegen-4.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mysema/codegen/codegen/0.6.7/codegen-0.6.7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jdt/core/compiler/ecj/4.3.1/ecj-4.3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/reflections/reflections/0.9.9/reflections-0.9.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.18.2-GA/javassist-3.18.2-GA.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/querydsl/querydsl-sql-spatial/4.0.3/querydsl-sql-spatial-4.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/querydsl/querydsl-spatial/4.0.3/querydsl-spatial-4.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/geolatte/geolatte-geom/0.13/geolatte-geom-0.13.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/vividsolutions/jts/1.10/jts-1.10.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16.jar"/>
+</classpath>
